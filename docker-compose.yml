@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # 빌드 타임 환경 변수 (env.mjs 검증 통과용)
+      args:
+        - NEXT_PUBLIC_LIVEKIT_URL=${NEXT_PUBLIC_LIVEKIT_URL}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local # 런타임 환경 변수 주입
+    environment:
+      - NODE_ENV=production
